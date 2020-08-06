@@ -27,7 +27,7 @@ SECRET_KEY = '$4+0y_z9deywi+al5=r^)n*b&enf_7a_eq_n-+8)1_e3o%0bkw'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['smm-django-todo-app.herokuapp.com']
 
 
 # Application definition
