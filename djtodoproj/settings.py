@@ -14,6 +14,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 import dj_database_url
 
+development = os.environ.get('DEVELOPMENT', False)
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -26,9 +28,12 @@ SECRET_KEY = os.environ.get(
     'SECRET_KEY', '$4+0y_z9deywi+al5 = r ^)n*b&enf_7a_eq_n-+8)1_e3o%0bkw')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = development
 
-ALLOWED_HOSTS = [os.environ.get('HEROKU_HOSTNAME')]
+if development:
+    ALLOWED_HOSTS = ['localhost']
+else:
+    ALLOWED_HOSTS = [os.environ.get('HEROKU_HOSTNAME')]
 
 
 # Application definition
@@ -76,14 +81,14 @@ WSGI_APPLICATION = 'djtodoproj.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
-""" DATABASES = {
+if development:
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
-} """
-
+}
+else:
 DATABASES = {
     'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
 }
